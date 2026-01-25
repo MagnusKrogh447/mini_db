@@ -8,11 +8,14 @@
 #pragma once
 #include <string>
 
+#include "../storage/StorageEngine.h"
+
 class Database {
 public:
     std::string execute(const std::string& command);
+
+private:
+    StorageEngine storage_;
 };
-
-
 #endif //MINI_DB_DATABASE_H
 
