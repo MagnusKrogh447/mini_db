@@ -21,23 +21,56 @@ static std::vector< std::string > tokenize( const std::string& input) {
     return tokens;
 }
 
-//Set command handling
+//Set, get and delete command handling
 std::string Database::execute(const std::string& command) {
+    //Break the command into whitespace-separated tokens
     auto tokens = tokenize(command);
 
+    //Handles empty commands
     if (tokens.empty()) {
         return "ERROR: Empty command";
     }
 
+    // Handle the SET command
     if (tokens [0] == "SET") {
         //SET must have exactly 3 tokens: ["SET", key, value]
         if (tokens.size() != 3) {
-            return "ERROR: SET requieres key and value";
+            return "ERROR: SET requires key and value";
         }
-        //Call the database's internal storage to save the key/value pair
+        //Store the key/value pair in the internal storage engine
         storage_.set(tokens[1], tokens[2]);
-        return "Succes";
+        return "Success";
     }
+
+    // Handle the GET command
+    if (tokens [0] == "GET") {
+        // GET must have exactly 2 tokens: ["GET", key]
+        if (tokens.size() != 2) {
+            return "ERROR: GET requires key";
+        }
+
+        // Attempt to retrieve the value
+        auto value = storage_.get(tokens[1]);
+        if (!value) {
+            return "ERROR: key not found";
+        }
+
+        return *value; //Extract the value from the optional
+    }
+
+    // Handle the DELETE command
+    if (tokens [0] == "DELETE") {
+        // DELETE must have exactly 2 tokens: ["DELETE", key]
+        if (tokens.size() != 2) {
+            return "ERROR: DELETE requires key";
+        }
+        // Attempt to remove the key
+        if (!storage_.remove(tokens[1])) {
+            return "ERROR: key not found";
+        }
+        return "Success";
+    }
+
     //If the command is not recognized
     return "ERROR: Unknown command";
 }
