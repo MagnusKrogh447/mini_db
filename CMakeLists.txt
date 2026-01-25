@@ -3,4 +3,8 @@ project(mini_db)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(mini_db src/main.cpp)
+add_executable(mini_db src/main.cpp
+        src/db/Database.cpp
+        src/db/Database.h
+        src/storage/StorageEngine.cpp
+        src/storage/StorageEngine.h)
