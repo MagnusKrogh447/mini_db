@@ -2,9 +2,6 @@
 // Created by Magnus Krogh on 25/01/2026.
 //
 
-#ifndef MINI_DB_DATABASE_H
-#define MINI_DB_DATABASE_H
-
 #pragma once
 #include <string>
 
@@ -17,5 +14,5 @@ public:
 private:
     StorageEngine storage_;
 };
-#endif //MINI_DB_DATABASE_H
+
 

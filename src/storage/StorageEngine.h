@@ -2,9 +2,6 @@
 // Created by Magnus Krogh on 25/01/2026.
 //
 
-#ifndef MINI_DB_STORAGEENGINE_H
-#define MINI_DB_STORAGEENGINE_H
-
 #pragma once
 #include <string>
 #include <optional>
@@ -23,4 +20,3 @@ private:
     std::unordered_map<std::string, std::string> data_;
 };
 
-#endif //MINI_DB_STORAGEENGINE_H

@@ -7,4 +7,5 @@ add_executable(mini_db src/main.cpp
         src/db/Database.cpp
         src/db/Database.h
         src/storage/StorageEngine.cpp
-        src/storage/StorageEngine.h)
+        src/storage/StorageEngine.h
+        src/db/Command.h)
