@@ -3,6 +3,7 @@
 //
 
 #include "Database.h"
+#include "Command.h"
 #include <sstream>
 #include <vector>
 
@@ -20,6 +21,32 @@ static std::vector< std::string > tokenize( const std::string& input) {
     }
     return tokens;
 }
+
+static Command parseCommand(const std::vector<std::string>& tokens) {
+    //Handles empty commands
+    if (tokens.empty()) {
+        return {CommandType::INVALID, {}};
+    }
+
+    const auto& cmd = tokens[0];
+
+    std::vector <std::string> args = {tokens.begin() + 1, tokens.end()};
+
+    if (cmd == "SET") {
+        return {CommandType::SET, args};
+    }
+
+    if (cmd == "GET") {
+        return {CommandType::GET, args};
+    }
+
+    if (cmd == "DELETE") {
+        return {CommandType::DELETE, args};
+    }
+
+    return {CommandType::INVALID, {}};
+}
+
 
 //Set, get and delete command handling
 std::string Database::execute(const std::string& command) {
@@ -74,3 +101,5 @@ std::string Database::execute(const std::string& command) {
     //If the command is not recognized
     return "ERROR: Unknown command";
 }
+
+
