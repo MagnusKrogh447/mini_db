@@ -27,23 +27,25 @@ static Command parseCommand(const std::vector<std::string>& tokens) {
     if (tokens.empty()) {
         return {CommandType::INVALID, {}};
     }
-
+    //First element of the command
     const auto& cmd = tokens[0];
 
+    //Vector containing everything else than the first element
     std::vector <std::string> args = {tokens.begin() + 1, tokens.end()};
 
+    //handles the get command
     if (cmd == "SET") {
         return {CommandType::SET, args};
     }
-
+    //handles the get command
     if (cmd == "GET") {
         return {CommandType::GET, args};
     }
-
+    //handles the delete command
     if (cmd == "DELETE") {
         return {CommandType::DELETE, args};
     }
-
+    //Unknown Commands
     return {CommandType::INVALID, {}};
 }
 
