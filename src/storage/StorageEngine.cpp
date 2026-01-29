@@ -4,6 +4,11 @@
 
 #include "StorageEngine.h"
 
+#include <filesystem>
+#include <fstream>
+#include <sstream>
+#include <iostream>
+
 //Store or overwrite a key/value pair in the internal map
 void StorageEngine::set(const std::string &key, const std::string &value) {
     data_[key] = value;
@@ -21,4 +26,32 @@ std::optional<std::string> StorageEngine::get(const std::string& key) {
 // Remove a key/value pair. Returns true if something was erased.
 bool StorageEngine::remove(const std::string &key) {
     return data_.erase(key) > 0;
+}
+
+//Disk storage to save data on reboot
+void StorageEngine::loadFromDisk(const std::string& filename) {
+    //Attempt to open file for reading
+    std::ifstream file(filename);
+    if (!file.is_open()) {
+        //If the file cant be opened, give warning and bail out fast.
+        std::cerr << "Could not open file " << filename << " for reading.\n";
+    }
+    //Clear any existing memory before loading new
+    data_.clear();
+
+    std::string line;
+    //Read file line by line
+    while (std::getline(file, line)) {
+        //Look for key and value separator
+        auto pos = line.find('=');
+        //If separator not found, skip since invalid format
+        if (pos != std::string::npos) continue;
+
+        //Extract the key
+        std::string key = line.substr(0, pos);
+        //Extract the value
+        std::string value = line.substr(pos + 1);
+        //Store the key and value pair in map
+        data_[key] = value;
+    }
 }

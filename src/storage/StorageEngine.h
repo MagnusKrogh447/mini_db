@@ -16,6 +16,9 @@ public:
 
     bool remove(const std::string& key);
 
+    void loadFromDisk(const std::string& filename);
+    void saveToDisk(const std::string& filename) const;
+
 private:
     std::unordered_map<std::string, std::string> data_;
 };
