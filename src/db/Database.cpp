@@ -9,6 +9,15 @@
 
 using namespace std;
 
+//Constructor
+Database::Database() {
+    storage_.loadFromDisk("data.db");
+}
+
+void Database::save() const {
+    storage_.saveToDisk("data.db");
+}
+
 //Splits a string into whitespace‑separated tokens.
 static vector<string> tokenize(const string &input) {
     //Wrap the input string in a stream so we can extract words easily
@@ -92,4 +101,3 @@ string Database::execute(const string& input) {
             return "ERROR: Unknown command";
     }
 }
-

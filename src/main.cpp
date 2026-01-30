@@ -18,5 +18,7 @@ int main() {
 
         cout << db.execute(input) << endl;
     }
+    db.save();
+
     return 0;
 }

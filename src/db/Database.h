@@ -11,7 +11,9 @@ using namespace std;
 
 class Database {
 public:
+    Database();
     string execute(const string& command);
+    void save() const;
 
 private:
     StorageEngine storage_;
