@@ -7,9 +7,11 @@
 
 #include "../storage/StorageEngine.h"
 
+using namespace std;
+
 class Database {
 public:
-    std::string execute(const std::string& command);
+    string execute(const string& command);
 
 private:
     StorageEngine storage_;
