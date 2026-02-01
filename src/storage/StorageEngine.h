@@ -3,15 +3,18 @@
 //
 
 #pragma once
+#include <memory>
 #include <string>
 #include <optional>
 
-#include <unordered_map>
+#include "Index.h"
 
 using namespace std;
 
 class StorageEngine {
 public:
+    StorageEngine();
+
     void set(const string& key, const string& value);
 
     optional<string> get(const string& key);
@@ -22,6 +25,6 @@ public:
     void saveToDisk(const string& filename) const;
 
 private:
-    unordered_map<string, string> data_;
+    unique_ptr<Index> index_;
 };
 

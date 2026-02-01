@@ -8,13 +8,15 @@
 
 using namespace std;
 
-class StorageIndex : public Index{
+class SortedIndex : public Index{
 public:
     void set(const string& key, const string& value) override;
 
     optional<string> get(const string& key) const override;
 
     bool remove(const string& key) override;
+
+    vector<pair<string, string>> scan() const override;
 
 private:
     map<string, string> data_;

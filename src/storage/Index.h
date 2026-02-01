@@ -6,6 +6,8 @@
 
 #include <string>
 #include <optional>
+#include <vector>
+#include <utility>
 
 using namespace std;
 
@@ -18,4 +20,6 @@ public:
     virtual optional<string> get(const string& key) const = 0;
 
     virtual bool remove(const string& key) = 0;
+
+    virtual vector<pair<string, string>> scan() const = 0;
 };
