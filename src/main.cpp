@@ -2,19 +2,25 @@
 
 #include "db/Database.h"
 
+using namespace std;
+
 int main() {
     Database db;
-    std::string input;
+    string input;
 
-    std::cout << "MiniDB has started. Type ¨exit¨ to quit. \n";
+    cout << "MiniDB has started. Type ¨exit¨ to quit. \n";
 
     while (true) {
-        std::cout << "> ";
-        std::getline(std::cin, input);
+        cout << "> ";
+        getline(cin, input);
 
-        if (input == "exit"){ break; }
+        if (input == "exit") {
+            db.save();
+            break;
+        }
 
-        std::cout << db.execute(input) << std::endl;
+        cout << db.execute(input) << endl;
     }
+
     return 0;
 }

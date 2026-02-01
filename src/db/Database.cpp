@@ -7,14 +7,25 @@
 #include <sstream>
 #include <vector>
 
+using namespace std;
+
+//Constructor
+Database::Database() {
+    storage_.loadFromDisk("data.db");
+}
+
+void Database::save() const {
+    storage_.saveToDisk("data.db");
+}
+
 //Splits a string into whitespace‑separated tokens.
-static std::vector<std::string> tokenize(const std::string &input) {
+static vector<string> tokenize(const string &input) {
     //Wrap the input string in a stream so we can extract words easily
-    std::istringstream stream(input);
+    istringstream stream(input);
     //Container to store the resulting tokens
-    std::vector<std::string> tokens;
+    vector<string> tokens;
     //Temporary buffer for each extracted token
-    std::string token;
+    string token;
     //Extract tokens separated by whitespace until the stream is exhausted
     while (stream >> token) {
         tokens.push_back(token);
@@ -23,7 +34,7 @@ static std::vector<std::string> tokenize(const std::string &input) {
 }
 
 //Dedicated function command parsing
-static Command parseCommand(const std::vector<std::string> &tokens) {
+static Command parseCommand(const vector<string> &tokens) {
     //Handles empty commands
     if (tokens.empty()) {
         return {CommandType::INVALID, {}};
@@ -32,7 +43,7 @@ static Command parseCommand(const std::vector<std::string> &tokens) {
     const auto &cmd = tokens[0];
 
     //Vector containing everything else than the first element
-    std::vector<std::string> args = {tokens.begin() + 1, tokens.end()};
+    vector<string> args = {tokens.begin() + 1, tokens.end()};
 
     //handles the get command
     if (cmd == "SET") {
@@ -52,7 +63,7 @@ static Command parseCommand(const std::vector<std::string> &tokens) {
 
 
 //Set, get and delete command handling using parse command
-std::string Database::execute(const std::string& input) {
+string Database::execute(const string& input) {
     auto tokens = tokenize(input);
     auto command = parseCommand(tokens);
 
@@ -90,4 +101,3 @@ std::string Database::execute(const std::string& input) {
             return "ERROR: Unknown command";
     }
 }
-

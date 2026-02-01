@@ -6,6 +6,8 @@
 #include <string>
 #include <vector>
 
+using namespace std;
+
 enum class CommandType {
     SET,
     GET,
@@ -15,5 +17,5 @@ enum class CommandType {
 
 struct Command {
     CommandType type;
-    std::vector<std::string> args;
+    vector<string> args;
 };

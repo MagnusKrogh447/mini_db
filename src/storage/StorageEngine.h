@@ -8,15 +8,20 @@
 
 #include <unordered_map>
 
+using namespace std;
+
 class StorageEngine {
 public:
-    void set(const std::string& key, const std::string& value);
+    void set(const string& key, const string& value);
 
-    std::optional<std::string> get(const std::string& key);
+    optional<string> get(const string& key);
 
-    bool remove(const std::string& key);
+    bool remove(const string& key);
+
+    void loadFromDisk(const string& filename);
+    void saveToDisk(const string& filename) const;
 
 private:
-    std::unordered_map<std::string, std::string> data_;
+    unordered_map<string, string> data_;
 };
 
