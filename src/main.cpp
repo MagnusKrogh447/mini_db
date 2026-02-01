@@ -14,11 +14,13 @@ int main() {
         cout << "> ";
         getline(cin, input);
 
-        if (input == "exit"){ break; }
+        if (input == "exit") {
+            db.save();
+            break;
+        }
 
         cout << db.execute(input) << endl;
     }
-    db.save();
 
     return 0;
 }

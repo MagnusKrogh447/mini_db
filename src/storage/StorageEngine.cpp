@@ -47,7 +47,7 @@ void StorageEngine::loadFromDisk(const string& filename) {
         //Look for key and value separator
         auto pos = line.find('=');
         //If separator not found, skip since invalid format
-        if (pos != string::npos) continue;
+        if (pos == string::npos) continue;
 
         //Extract the key
         string key = line.substr(0, pos);
@@ -67,6 +67,6 @@ void StorageEngine::saveToDisk(const string &filename) const {
     }
 
     for (const auto& [key, value] : data_) {
-        file << key << " = " << value << "\n";
+        file << key << "=" << value << "\n";
     }
 }
