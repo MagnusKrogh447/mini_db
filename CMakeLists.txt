@@ -9,4 +9,6 @@ add_executable(mini_db src/main.cpp
         src/storage/StorageEngine.cpp
         src/storage/StorageEngine.h
         src/db/Command.h
-        src/storage/Index.h)
+        src/storage/Index.h
+        src/storage/StorageIndex.cpp
+        src/storage/StorageIndex.h)
